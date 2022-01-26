@@ -1,7 +1,7 @@
 {
 	"name": "require-gpl",
 	"description": "Include this package as your program's dependency to force all derivatives to adopt the GPL.",
-	"version": "0.1.0-2",
+	"version": "0.1.0",
 	"main": "lib/index.js",
 	"bin": {
 		"require-gpl": "lib/cli.js"
@@ -11,7 +11,7 @@
 	},
 	"author": "Prokop Schield",
 	"dependencies": {
-		"doge-json": "^1"
+		"doge-json": "^1.2.7"
 	},
 	"devDependencies": {
 		"@types/node": ">=14"
