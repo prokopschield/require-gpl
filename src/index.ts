@@ -21,7 +21,7 @@ export default async function gpl(cwd = '.') {
 	if (fs.existsSync(p('package.json'))) {
 		const pkg = J.read(p('package.json'));
 		if (!pkg.license?.match(/^GPL/)) {
-			pkg.license = 'gpl-3.0-or-later';
+			pkg.license = 'GPL-3.0-or-later';
 			J.write(p('package.json'), pkg);
 		}
 	}
