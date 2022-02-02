@@ -9,6 +9,17 @@ export default async function gpl(cwd = '.') {
 	function p(p: string) {
 		return path.resolve(cwd, p);
 	}
+	if (fs.existsSync(p('package.json'))) {
+		const pkg = J.read(p('package.json'));
+		if (pkg.license?.match(/^AGPL/)) {
+			// project is licensed under the AGPL
+			return;
+		}
+		if (!pkg.license?.match(/^GPL/)) {
+			pkg.license = 'GPL-3.0-or-later';
+			J.write(p('package.json'), pkg);
+		}
+	}
 	if (fs.existsSync(p('COPYING.md'))) {
 		fs.writeFileSync(p('COPYING.md'), md);
 	} else if (fs.existsSync(p('COPYING'))) {
@@ -17,12 +28,5 @@ export default async function gpl(cwd = '.') {
 		fs.writeFileSync(p('LICENSE'), txt);
 	} else {
 		fs.writeFileSync(p('LICENSE.md'), md);
-	}
-	if (fs.existsSync(p('package.json'))) {
-		const pkg = J.read(p('package.json'));
-		if (!pkg.license?.match(/^GPL/)) {
-			pkg.license = 'GPL-3.0-or-later';
-			J.write(p('package.json'), pkg);
-		}
 	}
 }
